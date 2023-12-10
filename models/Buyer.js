@@ -16,7 +16,7 @@ const BuyerSchema = new mongoose.Schema({
     ],
     unique: true,
   },
-  role: {
+  type: {
     type: String,
     required: [true, 'Please provide a role'],
     minlength: 5,

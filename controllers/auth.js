@@ -19,3 +19,6 @@ const register = async (req, res) => {
     // });
     console.log(user)
   };
+
+
+  module.exports = { register}

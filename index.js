@@ -16,7 +16,7 @@ app.use(cors())
 
 
 app.use('/api/auth', authRouter)
-const port = process.env.port || 3000;
+const port = process.env.port || 5000;
 
 const start = async () => {
     try {

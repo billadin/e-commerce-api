@@ -13,8 +13,6 @@ const register = async (req, res) => {
     //   user: {
     //     email: user.email,
     //     username: user.username,
-    //     img:user.img,
-    //     meta
     //   },
     // });
     console.log(user)

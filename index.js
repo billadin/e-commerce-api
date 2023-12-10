@@ -10,13 +10,22 @@ const connectDB = require('./db/connect');
 //Router
 const authRouter = require('./routes/auth');
 
+//Error handler
+const errorHandlerMiddleware = require('./middleware/error-handler');
+
+
 
 //Middleware
 app.use(express.json());
 app.use(cors())
 
+app.use
 
 app.use('/api/auth', authRouter)
+
+//Grabbing error in handler
+app.use(errorHandlerMiddleware)
+
 const port = process.env.port || 5000;
 
 const start = async () => {

@@ -7,7 +7,7 @@ const register = async (req, res) => {
     const isExist = await Buyer.findOne({ email });
   
     if(isExist) {
-        res.status(StatusCodes.BAD_REQUEST).json({msg:'User already exist'})
+        throw new Error('User already exist')
     }
     const user = await Buyer.create({ ...req.body });  
     res.status(StatusCodes.CREATED).json(user);

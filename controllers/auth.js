@@ -4,7 +4,6 @@ const Seller = require("../models/Seller");
 const { StatusCodes } = require("http-status-codes");
 
 const register = async (req, res) => {
-  console.log(req.body)
   const {username, email, type } = req.body;
   if (!email || !type || !username) {
     throw new BadRequestError('Please provide all details')
@@ -28,13 +27,33 @@ const register = async (req, res) => {
 
 const login = async (req, res) => {
 
-  const { email, type } = req.body;
+  const { email, password } = req.body;
 
-  if (!email || !type) {
+  if (!email || !password) {
     throw new BadRequestError('Please provide all details')
   }
-  const buyerUser = await Buyer.findOne({ email });
-  console.log(buyerUser)
+  const buyerUser = await Buyer.findOne({ email, password });
+  const sellerUser = await Seller.findOne({ email, password });
+  
+  if(buyerUser) {
+    const token = buyerUser.createJWT();
+    return res.status(StatusCodes.OK).json({
+      user: {
+        email: buyerUser?.email,
+        token,
+      },
+    })
+  }
+
+  if(sellerUser) {
+    const token = sellerUser.createJWT();
+    return res.status(StatusCodes.OK).json({
+      user: {
+        email: sellerUser?.email,
+        token,
+      },
+    })
+  }
 
   
 };

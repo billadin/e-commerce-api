@@ -12,6 +12,7 @@ const authRouter = require('./routes/auth');
 
 //Error handler
 const errorHandlerMiddleware = require('./middleware/error-handler');
+const notFound = require('./middleware/not-found');
 
 
 
@@ -25,6 +26,7 @@ app.use('/api/auth', authRouter)
 
 //Grabbing error in handler
 app.use(errorHandlerMiddleware)
+app.use(notFound)
 
 const port = process.env.port || 5000;
 

@@ -5,6 +5,7 @@ const Seller = require("../models/Seller");
 const BadRequestError = require("../errors/bad-request");
 
 const register = async (req, res) => {
+  console.log(req.body)
   const email = req.body.email;
   const type = req.body.type;
 

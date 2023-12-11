@@ -10,6 +10,7 @@ const connectDB = require('./db/connect');
 //Router
 const authRouter = require('./routes/auth');
 const sellerRouter = require('./routes/seller');
+const buyerRouter = require('./routes/buyer');
 
 //Error handler
 const notFound = require('./middleware/not-found');
@@ -23,6 +24,7 @@ app.use(cors())
 
 app.use('/api/auth', authRouter)
 app.use('/api/seller', sellerRouter)
+app.use('/api/buyer', buyerRouter)
 
 //Grabbing error in handler
 app.use(notFound)

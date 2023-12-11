@@ -5,7 +5,7 @@ const { StatusCodes } = require("http-status-codes");
 
 const register = async (req, res) => {
   const {username, email, type } = req.body;
-  if (!email || !type || !username) {
+  if (!email || !type || !username ||!password) {
     throw new BadRequestError('Please provide all details')
   }
 

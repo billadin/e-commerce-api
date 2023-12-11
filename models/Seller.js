@@ -1,31 +1,48 @@
-const mongoose = require('mongoose');
-const jwt = require('jsonwebtoken')
+const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
 
 const SellerSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: [true, 'Please provide name'],
+    required: [true, "Please provide name"],
     maxlength: 50,
     minlength: 3,
   },
   email: {
     type: String,
-    required: [true, 'Please provide email'],
+    required: [true, "Please provide email"],
     match: [
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-      'Please provide a valid email',
+      "Please provide a valid email",
     ],
     unique: true,
   },
   password: {
     type: String,
-    required: [true, 'Please provide password'],
-    minlength: 8
+    required: [true, "Please provide password"],
+    minlength: 8,
   },
   type: {
     type: String,
     enum: ["seller"],
-    required: [true, 'Please provide a role'],
+    required: [true, "Please provide a role"],
+  },
+  catalog: {
+    type: [
+      {
+        name: {
+          type: String,
+          required: [true, "Please provide product name"],
+          maxlength: 50,
+          minlength: 3,
+        },
+        price: {
+          type: String,
+          required: [true, "Please provide price"],
+        },
+      },
+    ],
+    default: [],
   },
 });
 
@@ -39,4 +56,4 @@ SellerSchema.methods.createJWT = function () {
   );
 };
 
-module.exports = mongoose.model('Seller', SellerSchema);
+module.exports = mongoose.model("Seller", SellerSchema);

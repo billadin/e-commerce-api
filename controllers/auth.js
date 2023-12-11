@@ -54,8 +54,7 @@ const login = async (req, res) => {
       },
     })
   }
-
-  
+  res.status(StatusCodes.BAD_REQUEST).json({msg: 'Invalid login credentials'})
 };
 
 module.exports = { register, login };

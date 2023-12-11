@@ -11,22 +11,20 @@ const connectDB = require('./db/connect');
 const authRouter = require('./routes/auth');
 
 //Error handler
-const errorHandlerMiddleware = require('./middleware/error-handler');
 const notFound = require('./middleware/not-found');
-
+const errorHandlerMiddleware = require('./middleware/error-handler');
 
 
 //Middleware
 app.use(express.json());
 app.use(cors())
 
-app.use
 
 app.use('/api/auth', authRouter)
 
 //Grabbing error in handler
-app.use(errorHandlerMiddleware)
 app.use(notFound)
+app.use(errorHandlerMiddleware)
 
 const port = process.env.port || 5000;
 

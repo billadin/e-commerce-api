@@ -1,5 +1,6 @@
 const { StatusCodes } = require("http-status-codes");
 const Seller = require("../models/Seller");
+const Order = require("../models/Order");
 
 const getAllSeller = async (req, res) => {
     const sellers = await Seller.find()
@@ -11,8 +12,8 @@ const getAllSeller = async (req, res) => {
 
 
 const getCatalogOfSeller = async (req, res) => {
-    const {id} = req.params;
-    const seller = await Seller.findById(id)
+    const {seller_id} = req.params;
+    const seller = await Seller.findById(seller_id)
     if(seller) {
         const catalog = seller.catalog;
         res.status(StatusCodes.OK).json(catalog)
@@ -21,4 +22,11 @@ const getCatalogOfSeller = async (req, res) => {
 }
 
 
-module.exports = {getAllSeller,getCatalogOfSeller};
+const createOrder = async (req, res) => {
+    const {seller_id} = req.params;
+    const order = await Order.create({ products: req.body, seller_id})
+    res.status(StatusCodes.CREATED).json(order) 
+
+}
+
+module.exports = {getAllSeller,getCatalogOfSeller, createOrder};

@@ -6,6 +6,7 @@ const cors = require('cors')
 
 // DB connection
 const connectDB = require('./db/connect');
+const authenticateUser = require('./middleware/authentication');
 
 //Router
 const authRouter = require('./routes/auth');
@@ -23,8 +24,8 @@ app.use(cors())
 
 
 app.use('/api/auth', authRouter)
-app.use('/api/seller', sellerRouter)
-app.use('/api/buyer', buyerRouter)
+app.use('/api/seller', authenticateUser, sellerRouter)
+app.use('/api/buyer', authenticateUser, buyerRouter)
 
 //Grabbing error in handler
 app.use(notFound)

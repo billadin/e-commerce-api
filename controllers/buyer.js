@@ -6,8 +6,19 @@ const getAllSeller = async (req, res) => {
     if(sellers) {
         return res.status(StatusCodes.OK).json(sellers)
     }
-    res.status(StatusCodes.OK).json({msg: 'No seller found'})
+    res.status(StatusCodes.OK).json({msg: 'Seller not found'})
 }
 
 
-module.exports = getAllSeller;
+const getCatalogOfSeller = async (req, res) => {
+    const {id} = req.params;
+    const seller = await Seller.findById(id)
+    if(seller) {
+        const catalog = seller.catalog;
+        res.status(StatusCodes.OK).json(catalog)
+    }
+    res.status(StatusCodes.OK).json({msg: 'Seller not found'})
+}
+
+
+module.exports = {getAllSeller,getCatalogOfSeller};
